@@ -138,8 +138,8 @@ public class TemplateEngineRythm implements TemplateEngine {
         // put all entries of the session cookie to the map.
         // You can access the values by their key in the cookie
         // For eg: @session.get("key")
-        if (!context.getSessionCookie().isEmpty()) {
-            renderArgs.put("session", context.getSessionCookie().getData());
+        if (!context.getSession().isEmpty()) {
+            renderArgs.put("session", context.getSession().getData());
         }
 
         renderArgs.put("contextPath", context.getContextPath());
@@ -158,7 +158,7 @@ public class TemplateEngineRythm implements TemplateEngine {
 
         Map<String, String> flash = new HashMap<String, String>();
 
-        for (Entry<String, String> entry : context.getFlashCookie()
+        for (Entry<String, String> entry : context.getFlashScope()
                 .getCurrentFlashCookieData().entrySet()) {
 
             String messageValue = null;

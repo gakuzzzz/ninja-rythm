@@ -32,8 +32,8 @@ import ninja.i18n.Lang;
 import ninja.i18n.Messages;
 import ninja.rythm.exception.NinjaExceptionHandler;
 import ninja.rythm.util.RythmHelper;
-import ninja.session.FlashCookie;
-import ninja.session.SessionCookie;
+import ninja.session.FlashScope;
+import ninja.session.Session;
 import ninja.template.TemplateEngineManager;
 import ninja.utils.NinjaProperties;
 import ninja.utils.ResponseStreams;
@@ -93,10 +93,10 @@ public class TemplateEngineRythmTest {
     RythmEngine engine;
 
     @Mock
-    SessionCookie cookie;
+    Session session;
 
     @Mock
-    FlashCookie flashCookie;
+    FlashScope flashScope;
 
     @Test
     public void testInvoke() throws Exception {
@@ -118,12 +118,12 @@ public class TemplateEngineRythmTest {
         when(responseStreams.getWriter()).thenReturn(
                 new PrintWriter(byteArrayOutputStream));
 
-        when(cookie.isEmpty()).thenReturn(true);
-        when(contextRenerable.getSessionCookie()).thenReturn(cookie);
+        when(session.isEmpty()).thenReturn(true);
+        when(contextRenerable.getSession()).thenReturn(session);
 
-        when(flashCookie.getCurrentFlashCookieData()).thenReturn(
+        when(flashScope.getCurrentFlashCookieData()).thenReturn(
                 new HashMap<String, String>());
-        when(contextRenerable.getFlashCookie()).thenReturn(flashCookie);
+        when(contextRenerable.getFlashScope()).thenReturn(flashScope);
         when(contextRenerable.getRoute()).thenReturn(route);
 
         when(
